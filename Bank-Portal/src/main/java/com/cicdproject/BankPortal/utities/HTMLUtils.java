@@ -4,6 +4,9 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+
+import org.springframework.core.io.ClassPathResource;
 
 public class HTMLUtils {
 	public static String renderErrorPage(String errorMessage) {
@@ -20,11 +23,10 @@ public class HTMLUtils {
 		StringBuilder sb = new StringBuilder();
 		
 		BufferedReader lineReader = null;
-		FileReader fr = null;
+		ClassPathResource cpr = new ClassPathResource(filename);
 		
 		try {
-			fr = new FileReader(filename);
-			lineReader = new BufferedReader(fr);
+			lineReader = new BufferedReader(new InputStreamReader(cpr.getInputStream()));
 			
 			String line;
 			while ((line = lineReader.readLine()) != null) {
@@ -32,17 +34,13 @@ public class HTMLUtils {
 				sb.append("\n");
 			}
 			
-			if (fr != null) {
-				fr.close();
-			}
-			
 			if (lineReader != null) {
 				lineReader.close();
 			}
 		} catch (FileNotFoundException e) {
-			sb.append(renderErrorPage("File not found"));
+			sb.append(renderErrorPage("File not found: " + filename));
 		} catch (IOException e) {
-			sb.append(renderErrorPage("File failed to read"));
+			sb.append(renderErrorPage("File failed to read: " + filename));
 		}
 		
 		return sb.toString();

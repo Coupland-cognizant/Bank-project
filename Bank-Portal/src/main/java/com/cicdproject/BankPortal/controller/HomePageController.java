@@ -23,7 +23,7 @@ public class HomePageController {
 	
 	@RequestMapping(value = {"/"}, produces = MediaType.TEXT_HTML_VALUE)
     public String homePage() {
-		return HTMLUtils.getHtmlFromFile("src/main/resources/static/home.html");
+		return HTMLUtils.getHtmlFromFile("/static/home.html");
 	}
 	
 	@RequestMapping(value = {"/login"},
@@ -37,11 +37,11 @@ public class HomePageController {
 				&& bankModel.getPassword().length() > 0 && bankModel.getPassword().length() <= 60
 				&& bankModel.getPassword().equals(loginPass)) 
 		{
-			return HTMLUtils.getHtmlFromFile("src/main/resources/static/success.html");
+			return HTMLUtils.getHtmlFromFile("/static/success.html");
 		}
 		else
 		{
-			return HTMLUtils.getHtmlFromFile("src/main/resources/static/failure.html");
+			return HTMLUtils.getHtmlFromFile("/static/failure.html");
 		}
 	}
 	
@@ -69,12 +69,12 @@ public class HomePageController {
 				bankAccountService.create(newBankModel);
 			}
 			// valid
-			return HTMLUtils.getHtmlFromFile("src/main/resources/static/success.html");
+			return HTMLUtils.getHtmlFromFile("/static/success.html");
 		} 
 		else 
 		{
 			// invalid
-			return HTMLUtils.getHtmlFromFile("src/main/resources/static/failure.html");
+			return HTMLUtils.getHtmlFromFile("/static/failure.html");
 		}
 	}
 }
