@@ -31,7 +31,7 @@ public class HomePageController {
     		method = RequestMethod.POST,
 			produces = MediaType.TEXT_HTML_VALUE)
     public String loginPage(@RequestParam("loginEMail") String loginEMail, @RequestParam("loginPass") String loginPass) {
-		System.out.println("Signup - Email: " + loginEMail + ", Password: " + loginPass);
+		System.out.println("Login - Email: " + loginEMail + ", Password: " + loginPass);
 		BankAccountModel bankModel = bankAccountService.fetchAccountByEMail(loginEMail);
 		if(bankModel != null && bankModel.getEmail().length() > 0 && bankModel.getEmail().length() <= 254
 				&& bankModel.getPassword().length() > 0 && bankModel.getPassword().length() <= 60
